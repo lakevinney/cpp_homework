@@ -49,6 +49,28 @@ double y2, double r2) {
 		cout << "Circles are not crossing" << endl;
 	
 }
+
+// Задание 6.
+//===================================================================
+bool is_two_in_power(int val) {
+	if(val <= 0)
+    		return false; 
+	while((val%2)==0)
+	{
+ 
+		 if((val/=2)==1)
+    			return true;
+	}
+	return false;
+}
+
+bool is_two_in_power_bit(int val) {
+	
+	return ( val & (val - 1) ) == 0;
+}
+
+
+	
 	
 int main(){
 
@@ -72,5 +94,12 @@ int main(){
 	cout << "Circle 2 (x y r): ";
 	cin >> x2 >> y2 >> r2;
 	cross_points(x1, y1, r1, x2, y2, r2);
+	cout << "===================================================" << endl;
+//	Задание 6
+	int N;
+	cout << "Enter a number: ";
+	cin >> N;
+	//cout << "Is 2 in power? ==>" << is_two_in_power(N) << endl;
+	cout << "Is 2 in power? ==>" << is_two_in_power_bit(N) << endl;
 	return 0;
 }
