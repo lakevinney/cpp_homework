@@ -42,8 +42,6 @@ void cross_points(double x1, double y1, double r1, double x2, \
 double y2, double r2) {
 
 	double dist;
-	//dist = ((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
-	//if ((r1 + r2)*(r1 + r2) >= dist)
 	dist = sqrt(pow((x1 - x2), 2) + pow((y1 - y2), 2));
 	if (r1 + r2 >= dist && r1 + dist >= r2 && r2 + dist >= r1)
 		cout << "Circles are crossing" << endl;
