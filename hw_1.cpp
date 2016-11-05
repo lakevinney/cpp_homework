@@ -36,6 +36,31 @@ int sum_of_digits(int x){
 	return sum;
 }
 
+// Задание 3.
+//=================================================================== 
+void check_numbers() {
+
+        int f1=0, f2=0;
+        for(int i=0; i<1000; ++i) {
+                int j = i;
+                f1 = f2 = 0;
+                while ((j%10) != 0) {
+
+                        if((j%10) == 1)
+                                f1 = 1;
+                        else if((j%10) == 7)
+                                f2 = 1;
+                        j = j/10;
+                }
+
+                if(f1==1 && f2==1)
+                        cout << i << endl;
+        }
+
+
+
+}
+	
 // Задание 4.
 //===================================================================
 void cross_points(double x1, double y1, double r1, double x2, \
@@ -48,6 +73,8 @@ double y2, double r2) {
 	else
 		cout << "Circles are not crossing" << endl;
 	
+				
+							
 }
 
 // Задание 6.
@@ -87,6 +114,8 @@ int main(){
 	cin >> h_num;
 	cout << "Sum of digits: " << sum_of_digits(h_num) << endl;
 	cout << "===================================================" << endl;
+//	Задание 3
+	check_numbers(); 
 //	Задание 4	
 	double x1, y1, r1, x2, y2, r2;
 	cout << "Circle 1 (x y r): ";
