@@ -77,6 +77,15 @@ double y2, double r2) {
 							
 }
 
+// Задание 5.
+//===================================================================
+
+bool is_cube(int x) {
+
+        return cbrt(x) == (int)cbrt(x);
+}
+
+ 
 // Задание 6.
 //===================================================================
 bool is_two_in_power(int val) {
@@ -115,7 +124,8 @@ int main(){
 	cout << "Sum of digits: " << sum_of_digits(h_num) << endl;
 	cout << "===================================================" << endl;
 //	Задание 3
-	check_numbers(); 
+	check_numbers();
+	cout << "===================================================" << endl; 
 //	Задание 4	
 	double x1, y1, r1, x2, y2, r2;
 	cout << "Circle 1 (x y r): ";
@@ -124,6 +134,13 @@ int main(){
 	cin >> x2 >> y2 >> r2;
 	cross_points(x1, y1, r1, x2, y2, r2);
 	cout << "===================================================" << endl;
+//      Задание 5
+	for(int i=1; i<=1000000; ++i)
+                if(is_cube(i)) {
+                        cout << i;
+                        cout << " is a cube of " << cbrt(i) << endl;
+                        }
+	 cout << "===================================================" << endl;
 //	Задание 6
 	int N;
 	cout << "Enter a number: ";
