@@ -44,7 +44,7 @@ void check_numbers() {
         for(int i=0; i<1000; ++i) {
                 int j = i;
                 f1 = f2 = 0;
-                while ((j%100) != 0) {
+                while (j != 0) {
 
                         if((j%10) == 1)
                                 f1 = 1;
