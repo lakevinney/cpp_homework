@@ -52,6 +52,19 @@ void remove_char(string s)
     cout<<s<<endl;
 }
 
+//Task 12
+int* swap_values(int* arr, int size)
+{
+    for (int i=0; i!=size; i+=2)
+     {
+     int temp = arr[i];
+     arr[i] = arr[i+1];
+     arr[i+1] = temp;
+     }
+
+    return arr;
+}
+
 int main()
 {
     //======================================================
@@ -60,6 +73,7 @@ int main()
     char str2[]="C++";
     cout<<cat(str1,str2)<<endl;
     cout<<"============================================"<<endl;
+
     //======================================================
     //Task 8
     char s[100];
@@ -67,14 +81,35 @@ int main()
     cin>>s;
     count_reps(s);
     cout<<"============================================"<<endl;
+
     //======================================================
     //Task 10
     string line="fabrika c++ course";
     lower_to_upper(line);
     cout<<"============================================"<<endl;
+
+    //======================================================
     //Task 11
     remove_char(line);
     cout<<"============================================"<<endl;
+
+    //======================================================
+    //Task 12
+    int N=12;
+    int* arr=new int[N];
+    for(int i=0; i!=N; ++i)
+    {
+        arr[i]=i+1;
+        cout<<arr[i]<<" ";
+    }
+    cout<<endl;
+    int* new_arr=swap_values(arr,N);
+    for(int i=0; i!=N; ++i)
+        cout<<new_arr[i]<<" ";
+    cout<<endl;
+    delete arr;
+    cout<<"============================================"<<endl;
+
     return 0;
 }
 
