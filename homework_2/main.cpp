@@ -44,7 +44,7 @@ int main()
     //Task 8
     char s[100];
     cout<<"Enter the string: ";
-    gets(s);
+    cin>>s;
     count_reps(s);
     cout<<"============================================"<<endl;
     return 0;
