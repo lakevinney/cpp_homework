@@ -32,6 +32,26 @@ void count_reps(char* str)
         cout << at->first << '\t'<< at->second << endl;
 }
 
+//Task 10
+void lower_to_upper(string s)
+{
+    for(int i=0; i!=s.length(); i++)
+            if((i==0) || (s[i-1]==' '))
+            s[i]=toupper(s[i]);
+
+    cout<<s<<endl;
+}
+
+//Task 11
+void remove_char(string s)
+{
+    for(int i=0; i!=s.length(); i++)
+            if((i==0) || (s[i-1]==' '))
+            s.erase(i,1);
+
+    cout<<s<<endl;
+}
+
 int main()
 {
     //======================================================
@@ -46,6 +66,14 @@ int main()
     cout<<"Enter the string: ";
     cin>>s;
     count_reps(s);
+    cout<<"============================================"<<endl;
+    //======================================================
+    //Task 10
+    string line="get the fuck outta here";
+    lower_to_upper(line);
+    cout<<"============================================"<<endl;
+    //Task 11
+    remove_char(line);
     cout<<"============================================"<<endl;
     return 0;
 }
