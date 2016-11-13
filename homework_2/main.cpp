@@ -69,7 +69,7 @@ int main()
     cout<<"============================================"<<endl;
     //======================================================
     //Task 10
-    string line="get the fuck outta here";
+    string line="fabrika c++ course";
     lower_to_upper(line);
     cout<<"============================================"<<endl;
     //Task 11
