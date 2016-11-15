@@ -2,6 +2,7 @@
 #include <cstring>
 #include <string>
 #include <cstdio>
+#include <ctime>
 #include <map>
 using namespace std;
 
@@ -65,6 +66,46 @@ int* swap_values(int* arr, int size)
     return arr;
 }
 
+//Task 13
+void task13_func()
+{
+    int* a=new int[50];
+    int j=0, i=0, k[50];
+    while(j<100)
+    {
+       a[i]=j+1;
+       j+=2;
+       i++;
+    }
+
+    for(int i=0; i!=50; i++)
+        cout<<a[i]<<" ";
+    cout<<endl;
+    cout<<"============================================"<<endl;
+    srand(time(NULL));
+    //Trying to randomize output
+    //for(int i=0; i!=50; i++)
+    //{
+      //  k[i]=rand()%50;
+        //for(int t=0; t<i; ++t)
+          //  if(k[i] == k[t]){i-=1; break;}
+    //}
+    //for(int i=0; i!=50; ++i)
+      //  cout<<a[k[i]]<<" ";
+    for(int i=0; i!=50; i++)
+    {
+        int j=rand()%50;
+        int temp=a[i];
+        a[i]=a[j];
+        a[j]=temp;
+
+    }
+
+    for(int i=0; i!=50; i++)
+        cout<<a[i]<<" ";
+     cout<<endl;
+}
+
 int main()
 {
     //======================================================
@@ -110,6 +151,9 @@ int main()
     delete arr;
     cout<<"============================================"<<endl;
 
+    //======================================================
+    //Task 13
+    task13_func();
     return 0;
 }
 
