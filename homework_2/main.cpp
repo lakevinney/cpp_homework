@@ -33,6 +33,22 @@ void count_reps(char* str)
         cout << at->first << '\t'<< at->second << endl;
 }
 
+//Task 9
+const char* encrypt(char* input)
+{
+    char* table="abcdefghijklmnopqrstuvwxyz0123456789-";
+    char* encrypted=new char[strlen(input)];
+    int shift=5;
+    for(int i=0; i!=strlen(input); i++)
+        for(int j=0; j!=strlen(table); j++)
+            if(input[i]==table[j])
+                if((strlen(table)-j)<=shift)
+                    encrypted[i]=table[shift-(strlen(table)-j)];
+                else
+                    encrypted[i]=table[j+shift];
+    return encrypted;
+}
+
 //Task 10
 void lower_to_upper(string s)
 {
@@ -121,6 +137,16 @@ int main()
     cout<<"Enter the string: ";
     cin>>s;
     count_reps(s);
+    cout<<"============================================"<<endl;
+
+    //======================================================
+    //Task 9
+    char input[24];
+    cout<<"Enter the random symbols (a-e, 0-9, -): ";
+    cin>>input;
+    cout<<endl;
+    cout<<"Encrypted line: ";
+    cout<<encrypt(input)<<endl;
     cout<<"============================================"<<endl;
 
     //======================================================
