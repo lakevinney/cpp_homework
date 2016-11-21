@@ -18,6 +18,15 @@ void rotate_clockwise(double** arr, int n, int m)
     }
 }
 
+//============================Task16=====================================
+double determinant(double** arr)
+{
+    double det = arr[0][0] * arr[1][1] * arr[2][2] + arr[0][1] * arr[1][2] * arr[2][0] + \
+            arr[0][2] * arr[1][0] * arr[2][1] - arr[0][2] * arr[1][1] * arr[2][0] - \
+            arr[0][1] * arr[1][0] * arr[2][2] - arr[0][0] * arr[1][2] * arr[2][1];
+    return det;
+}
+
 int main()
 {
     //============================Task15=====================================
@@ -55,6 +64,30 @@ int main()
     for(int i = 0; i < n; i++) delete[] a[i];
         delete[] a;
     cout<<"==================================================================="<<endl;
+
+    //============================Task16=====================================
+    cout<<"Enter 3x3 matrix:"<<endl;
+    double** matr=new double*[n];
+    for(int i=0; i!=3; i++)
+    {
+        cout<<"line "<<i<<endl;
+        matr[i]=new double[m];
+        for(int j=0; j!=3; j++)
+        {
+            cout<<"matr["<<i<<"]["<<j<<"]= ";
+            cin>>matr[i][j];
+        }
+    }
+    cout<<endl;
+    cout<<"Matrix:"<<endl;
+    for(int i=0; i!=3; i++)
+    {
+        for(int j=0; j!=3; j++)
+            cout<<matr[i][j]<<" ";
+        cout<<endl;
+    }
+    cout<<"Determinant: "<<determinant(matr)<<endl;
+
     return 0;
 }
 
