@@ -171,6 +171,14 @@ int main()
             cout<<setw(2)<<C[i][j]<<" ";
         cout<<endl;
     }
+
+    for(int i = 0; i < row_A; i++) delete[] A[i];
+        delete[] A;
+
+    for(int i = 0; i < row_B; i++) delete[] B[i];
+        delete[] B;
+
+    cout<<"==================================================================="<<endl;
     return 0;
 }
 
