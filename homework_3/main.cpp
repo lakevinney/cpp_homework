@@ -1,7 +1,21 @@
 #include <iostream>
 #include <iomanip>
+#include <time.h>
+#include <cstring>
 
 using namespace std;
+
+//============================Task14=====================================
+char* passgen(int length)
+{
+    char* symbols="ABCDEFGHIJKLMNOPQRSTUWXYZabcdefghijklmnopqrstuwxyz0123456789_";
+    char* pass=new char[length];
+    srand(time(NULL));
+    for(int i=0; i!=length; ++i)
+        pass[i]=symbols[rand()% strlen(symbols)];
+
+    return pass;
+}
 
 //============================Task15=====================================
 void rotate_clockwise(double** arr, int n, int m)
@@ -48,6 +62,18 @@ double** multiply(double** arr1, int n1, int m1, double** arr2, int n2, int m2)
 
 int main()
 {
+    //============================Task14=====================================
+    int passlen;
+    cout<<"Enter the password length: ";
+    cin>>passlen;
+    char* password=passgen(passlen);
+    cout<<"Generated: ";
+    for(int i=0; i!=passlen; ++i)
+        cout<<password[i];
+
+    cout<<endl;
+    cout<<"==================================================================="<<endl;
+    return 0;
     //============================Task15=====================================
     int n,m;
     cout<<"Enter the numbers of rows and columns of the matrix (n,m): ";
