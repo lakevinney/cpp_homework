@@ -9,7 +9,7 @@ using namespace std;
 //Task 7
 const char* cat(char* str1, char* str2)
 {
-    char* res=new char[20];
+    char* res=new char[strlen(str1) + strlen(str2) + 1];
     for(unsigned int i=0; i!=strlen(str1); ++i)
         res[i]=str1[i];
     for(unsigned int i=0; i!=strlen(str2); ++i)
@@ -128,7 +128,9 @@ int main()
     //Task 7
     char str1[]="Fabrika ";
     char str2[]="C++";
-    cout<<cat(str1,str2)<<endl;
+    const char* catStr = cat(str1,str2);
+    cout<<catStr<<endl;
+    delete[] catStr;
     cout<<"============================================"<<endl;
 
     //======================================================
