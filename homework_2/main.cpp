@@ -34,19 +34,14 @@ void count_reps(char* str)
 }
 
 //Task 9
-const char* encrypt(char* input)
+void Encrypt(const char* input, char* output)
 {
-    char* table="abcdefghijklmnopqrstuvwxyz0123456789-";
-    char* encrypted=new char[strlen(input)];
+    char table[]="abcdefghijklmnopqrstuvwxyz0123456789-";
     int shift=5;
-    for(int i=0; i!=strlen(input); i++)
-        for(int j=0; j!=strlen(table); j++)
+    for(unsigned int i=0; i!=strlen(input); i++)
+        for(unsigned int j=0; j!=strlen(table); j++)
             if(input[i]==table[j])
-                if((strlen(table)-j)<=shift)
-                    encrypted[i]=table[shift-(strlen(table)-j)];
-                else
-                    encrypted[i]=table[j+shift];
-    return encrypted;
+                output[i]=table[(j+shift)%strlen(table)];
 }
 
 //Task 10
@@ -147,8 +142,10 @@ int main()
     cout<<"Enter the random symbols (a-e, 0-9, -): ";
     cin>>input;
     cout<<endl;
+    char output[strlen(input)+1];
+    Encrypt(input, output);
     cout<<"Encrypted line: ";
-    cout<<encrypt(input)<<endl;
+    cout<<output<<endl;
     cout<<"============================================"<<endl;
 
     //======================================================
