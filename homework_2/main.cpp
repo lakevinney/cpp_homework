@@ -37,7 +37,7 @@ void CountRepeats(const char* str)
 //Task 9
 void Encrypt(const char* input, char* output)
 {
-    char table[]="abcdefghijklmnopqrstuvwxyz0123456789-";
+   const char table[]="abcdefghijklmnopqrstuvwxyz0123456789-";
     int shift=5;
     for(unsigned int i=0; i!=strlen(input); i++)
         for(unsigned int j=0; j!=strlen(table); j++)
@@ -46,9 +46,9 @@ void Encrypt(const char* input, char* output)
 }
 
 //Task 10
-void lower_to_upper(string s)
+void lower_to_upper(string& s)
 {
-    for(int i=0; i!=s.length(); i++)
+    for(unsigned int i=0; i!=s.length(); i++)
             if((i==0) || (s[i-1]==' '))
             s[i]=toupper(s[i]);
 
@@ -56,11 +56,12 @@ void lower_to_upper(string s)
 }
 
 //Task 11
-void remove_char(string s)
+void RemoveChar(string& s)
 {
-    for(int i=0; i!=s.length(); i++)
-            if((i==0) || (s[i-1]==' '))
-            s.erase(i,1);
+    for(unsigned int i = 0; i != s.length(); i++)
+       if((i == 0) || (s[i - 1]== ' '))
+           for(unsigned int j = i; j != s.length(); j++)
+               s[j] = s[j + 1];
 
     cout<<s<<endl;
 }
@@ -151,13 +152,13 @@ int main()
 
     //======================================================
     //Task 10
-    string line="fabrika c++ course";
+    string line = "fabrika c++ course";
     lower_to_upper(line);
     cout<<"============================================"<<endl;
 
     //======================================================
     //Task 11
-    remove_char(line);
+    RemoveChar(line);
     cout<<"============================================"<<endl;
 
     //======================================================
