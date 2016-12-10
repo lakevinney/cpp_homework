@@ -6,14 +6,27 @@
 using namespace std;
 
 //============================Task14=====================================
-char* passgen(int length)
+char* PassGen(int length)
 {
-    char* symbols="ABCDEFGHIJKLMNOPQRSTUWXYZabcdefghijklmnopqrstuwxyz0123456789_";
-    char* pass=new char[length];
-    srand(time(NULL));
-    for(int i=0; i!=length; ++i)
-        pass[i]=symbols[rand()% strlen(symbols)];
+    const char symbols[] = "ABCDEFGHIJKLMNOPQRSTUWXYZabcdefghijklmnopqrstuwxyz0123456789_";
+    char* pass = new char[length];
+   // srand(time(NULL));
+    int dig = 0, upper = 0, lower = 0;
+    while((dig == 0) || (upper == 0) || (lower == 0))
+    {
+        for(int i = 0; i != length; ++i)
+        {
+            pass[i] = symbols[rand()% strlen(symbols)];
+            if(int(pass[i]) >= 65 && int(pass[i]) <= 90)
+                upper += 1;
+            if(int(pass[i]) >= 97 && int(pass[i]) <= 122)
+                lower += 1;
+            if(int(pass[i]) >= 48 && int(pass[i]) <= 57)
+                dig += 1;
+        }
 
+
+    }
     return pass;
 }
 
@@ -63,17 +76,22 @@ double** multiply(double** arr1, int n1, int m1, double** arr2, int n2, int m2)
 int main()
 {
     //============================Task14=====================================
-    int passlen;
-    cout<<"Enter the password length: ";
-    cin>>passlen;
-    char* password=passgen(passlen);
-    cout<<"Generated: ";
-    for(int i=0; i!=passlen; ++i)
-        cout<<password[i];
+//    int passLen;
+//    cout<<"Enter the password length: ";
+//    cin>>passLen;
+    for(int j= 0; j != 50; j++)
+    {
+        int count = 0;
+        char* pPassword = PassGen(8);
+        cout<<"Generated: ";
+        for(int i=0; i!=8; ++i)
+            cout<<pPassword[i];
 
-    cout<<endl;
+        delete[] pPassword;
+        cout<<endl;
+    }
     cout<<"==================================================================="<<endl;
-    return 0;
+   // return 0;
     //============================Task15=====================================
     int n,m;
     cout<<"Enter the numbers of rows and columns of the matrix (n,m): ";
@@ -203,6 +221,7 @@ int main()
 
     for(int i = 0; i < row_B; i++) delete[] B[i];
         delete[] B;
+
 
     cout<<"==================================================================="<<endl;
     return 0;
