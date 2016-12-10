@@ -7,7 +7,7 @@
 using namespace std;
 
 //Task 7
-const char* cat(char* str1, char* str2)
+const char* cat(const char* str1, const char* str2)
 {
     char* res=new char[strlen(str1) + strlen(str2) + 1];
     for(unsigned int i=0; i!=strlen(str1); ++i)
@@ -19,18 +19,19 @@ const char* cat(char* str1, char* str2)
 }
 
 //Task 8
-void count_reps(char* str)
+
+
+void CountRepeats(const char* str)
 {
-    map <char,int> characters;
-    map <char,int>::iterator begin, at, end;
+    int reps[256] = {0};
 
-    for(unsigned int i=0; i<strlen(str); i++)
-        characters[str[i]]++;
+    for(int i = 0; str[i]; i++)
+        reps[str[i]]++;
 
-    begin = characters.begin();
-    end  = characters.end();
-    for(at = begin; at != end; at++)
-        cout << at->first << '\t'<< at->second << endl;
+    for(int i=0; i != 256; i++)
+        if(reps[i])
+            cout<<char(i)<<" "<<reps[i]<<endl;
+
 }
 
 //Task 9
@@ -133,7 +134,7 @@ int main()
     char s[100];
     cout<<"Enter the string: ";
     cin>>s;
-    count_reps(s);
+    CountRepeats(s);
     cout<<"============================================"<<endl;
 
     //======================================================
