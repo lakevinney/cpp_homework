@@ -65,14 +65,12 @@ bool IsOdd(int elem)
 int* Filter(act_2 action, int* arr, int size, int& newSize)
 {
     newSize = 0;
-    int count = 0;
     int* newArr = new int[size];
     for(int i = 0; i < size; i++)
         if(action(arr[i]) == true)
         {
+            newArr[newSize] = arr[i];
             newSize++;
-            newArr[count] = arr[i];
-            count++;
         }
 
 
