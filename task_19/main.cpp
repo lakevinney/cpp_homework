@@ -42,26 +42,22 @@ int* Map(act_1 action, int* arr, int size)
 
 //------------------------------------------------------------
 
-typedef bool (*act_2)(int, int&);
+typedef bool (*act_2)(int);
 
-bool FilterEven(int elem, int& count)
+bool IsEven(int elem)
 {
     if(elem%2 == 0)
-    {
-        count++;
         return true;
-    }
+
 
     return false;
 }
 
-bool FilterOdd(int elem, int& count)
+bool IsOdd(int elem)
 {
     if(elem%2 != 0)
-    {
-        count++;
         return true;
-    }
+
 
     return false;
 }
@@ -72,8 +68,9 @@ int* Filter(act_2 action, int* arr, int size, int& newSize)
     int count = 0;
     int* newArr = new int[size];
     for(int i = 0; i < size; i++)
-        if(action(arr[i], newSize) == true)
+        if(action(arr[i]) == true)
         {
+            newSize++;
             newArr[count] = arr[i];
             count++;
         }
@@ -84,35 +81,30 @@ int* Filter(act_2 action, int* arr, int size, int& newSize)
 
 //------------------------------------------------------------
 
-typedef int (*act_3)(int*, int);
+typedef int (*act_3)(int, int);
 
-int RdcSum(int* arr, int size)
+int Sum(int first, int second)
 {
-    int sum = 0;
-    for(int i = 0; i < size; i++)
-    {
-        sum += arr[i];
-        arr[0] = sum;
-    }
+    return first + second;
 
-    return arr[0];
 }
 
-int RdcMult(int* arr, int size)
+int SumAndDouble(int first, int second)
 {
-    int mult = 1;
-    for(int i = 0; i < size; i++)
-    {
-        mult *= arr[i];
-        arr[0] = mult;
-    }
 
-    return arr[0];
+    return 2 * (first + second);
+
 }
 
 int Reduce(act_3 action, int* arr, int size)
 {
-    return action(arr, size);
+
+    for(int i = 1; i < size; i++)
+    {
+        arr[0] = action(arr[0], arr[i]);
+    }
+
+    return arr[0];
 }
 
 int main()
@@ -142,7 +134,7 @@ int main()
 
     //Testing the Filter() function
 
-    typedef bool (*act_2)(int, int&);
+    typedef bool (*act_2)(int);
     int* (*pFilter)(act_2, int*, int, int&);
     pFilter = Filter;
     int newSize;
@@ -152,19 +144,19 @@ int main()
     cout<<"\n\n-------------Source array 2---------------------------"<<endl;
     PrintArray(arr_2, 10);
 
-    cout<<"--------------------FilterEven------------------------"<<endl;
-    int* pEven = pFilter(FilterEven, arr_2, 10, newSize);
+    cout<<"--------------------IsEven------------------------"<<endl;
+    int* pEven = pFilter(IsEven, arr_2, 10, newSize);
     PrintArray(pEven, newSize);
     delete[] pEven;
 
-    cout<<"--------------------FilterOdd-------------------------"<<endl;
-    int* pOdd = pFilter(FilterOdd, arr_2, 10, newSize);
+    cout<<"--------------------IsOdd-------------------------"<<endl;
+    int* pOdd = pFilter(IsOdd, arr_2, 10, newSize);
     PrintArray(pOdd, newSize);
     delete[] pOdd;
 
     //Testing the Reduce() function
 
-    typedef int (*act_3)(int*, int);
+    typedef int (*act_3)(int, int);
     int (*pReduce)(act_3, int*, int);
     pReduce = Reduce;
     int arr_3[10];
@@ -174,10 +166,12 @@ int main()
     PrintArray(arr_3, 10);
 
     cout<<"--------------------Reduced by sum------------------------"<<endl;
-    cout<<"Reduced array: "<<pReduce(RdcSum, arr_3, 10)<<endl;
+    int sum = pReduce(Sum, arr_3, 10);
+    cout<<"Reduced array: "<<sum<<endl;
 
     cout<<"--------------------Reduced by multiply------------------------"<<endl;
-    cout<<"Reduced array: "<<pReduce(RdcMult, arr_3, 10)<<endl;
+    int doubleSum = pReduce(SumAndDouble, arr_3, 10);
+    cout<<"Reduced array: "<<doubleSum<<endl;
 
     return 0;
 }
