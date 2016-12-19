@@ -8,23 +8,39 @@ using namespace std;
 //============================Task14=====================================
 char* PassGen(int length)
 {
-    const char symbols[] = "ABCDEFGHIJKLMNOPQRSTUWXYZabcdefghijklmnopqrstuwxyz0123456789_";
+    const char upper[] = "ABCDEFGHIJKLMNOPQRSTUWXYZ";
+    const char lower[] = "abcdefghijklmnopqrstuwxyz";
+    const char digAndSym[] = "0123456789_";
+    bool isUp = false, isLow = false, isDig = false;
+
     char* pass = new char[length];
-   // srand(time(NULL));
-    int dig = 0, upper = 0, lower = 0;
-    while((dig == 0) || (upper == 0) || (lower == 0))
+
+    while((isUp == false) || (isLow == false) || (isDig == false))
     {
         for(int i = 0; i != length; ++i)
         {
-            pass[i] = symbols[rand()% strlen(symbols)];
-            if(int(pass[i]) >= 65 && int(pass[i]) <= 90)
-                upper += 1;
-            if(int(pass[i]) >= 97 && int(pass[i]) <= 122)
-                lower += 1;
-            if(int(pass[i]) >= 48 && int(pass[i]) <= 57)
-                dig += 1;
-        }
+           int choice = 0;
+           choice = 1 + rand()%3;
 
+           switch(choice)
+           {
+
+            case 1:
+               pass[i] = upper[rand()% strlen(upper)];
+               isUp = true;
+               break;
+
+            case 2:
+               pass[i] = lower[rand()% strlen(lower)];
+               isLow = true;
+               break;
+
+            case 3:
+               pass[i] = digAndSym[rand()% strlen(digAndSym)];
+               isDig = true;
+               break;
+           }
+        }
 
     }
     return pass;
@@ -91,7 +107,7 @@ int main()
         cout<<endl;
     }
     cout<<"==================================================================="<<endl;
-   // return 0;
+//    return 0;
     //============================Task15=====================================
     int n,m;
     cout<<"Enter the numbers of rows and columns of the matrix (n,m): ";
