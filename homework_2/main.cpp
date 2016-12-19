@@ -58,10 +58,23 @@ void lower_to_upper(string& s)
 //Task 11
 void RemoveChar(string& s)
 {
-    for(unsigned int i = 0; i != s.length(); i++)
-       if((i == 0) || (s[i - 1]== ' '))
-           for(unsigned int j = i; j != s.length(); j++)
-               s[j] = s[j + 1];
+    size_t i = 1, j = 0, count = 0;
+    while(i != s.length())
+    {
+        s[j] = s[i];
+
+        if(s[j] == ' ')
+        {
+            i++;
+            count++;
+        }
+
+        i++;
+        j++;
+    }
+
+    for(size_t i = 1; i <= count + 1; i++)
+        s[s.length() - i] = '\0';
 
     cout<<s<<endl;
 }
@@ -158,9 +171,9 @@ int main()
 
     //======================================================
     //Task 11
-    RemoveChar(line);
+    RemoveChar(line);    
     cout<<"============================================"<<endl;
-
+    return 0;
     //======================================================
     //Task 12
     int N=12;
