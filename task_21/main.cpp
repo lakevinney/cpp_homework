@@ -9,15 +9,24 @@ using namespace std;
 class Shape
 {
 
-public:
+protected:
+
     float m_x;
     float m_y;
 
-    Shape()
+public:
+
+    Shape() : m_x(0), m_y(0)
     {
         cout << __PRETTY_FUNCTION__ << endl;
-        m_x = 0;
-        m_y = 0;
+
+    }
+
+    Shape(const float x, const float y)
+    {
+        m_x = x;
+        m_y = y;
+        cout << __PRETTY_FUNCTION__ << endl;
     }
 
     virtual ~Shape()
@@ -36,15 +45,15 @@ class Rectangle : public Shape
     float m_height;
 
 public:
-    Rectangle()
+    Rectangle() : Shape(), m_width(0), m_height(0)
     {
         cout << __PRETTY_FUNCTION__ << endl;
-        m_width = 0;
-        m_height = 0;
 
     }
 
-    Rectangle(const float width, const float height)
+    Rectangle(const float x, const float y, \
+              const float width, const float height) : \
+        Shape(x, y)
     {
         cout << __PRETTY_FUNCTION__ << endl;
         m_width = width;
@@ -72,16 +81,15 @@ class Triangle : public Shape
     float m_sideC;
 
 public:
-    Triangle()
+    Triangle() : Shape(), m_sideA(0), m_sideB(0), m_sideC(0)
     {
         cout << __PRETTY_FUNCTION__ << endl;
-        m_sideA = 0;
-        m_sideB = 0;
-        m_sideC = 0;
 
     }
 
-    Triangle(const float a, const float b, const float c)
+    Triangle(const float x, const float y, \
+             const float a, const float b, const float c) : \
+        Shape(x, y)
     {
         cout << __PRETTY_FUNCTION__ << endl;
         m_sideA = a;
@@ -108,14 +116,13 @@ class Circle : public Shape
     float m_radius;
 
 public:
-    Circle()
+    Circle() : Shape(), m_radius(0)
     {
         cout << __PRETTY_FUNCTION__ << endl;
-        m_radius = 0;
 
     }
 
-    Circle(const float r)
+    Circle(const float x, const float y, const float r) : Shape(x, y)
     {
         cout << __PRETTY_FUNCTION__ << endl;
         m_radius = r;
@@ -137,9 +144,9 @@ public:
 //--------------------------------------------------------
 int main()
 {
-    Rectangle* pRectObj = new Rectangle(10, 15);
-    Triangle* pTriObj = new Triangle(3, 4, 5);
-    Circle* pCircObj = new Circle(3.14);
+    Rectangle* pRectObj = new Rectangle(1, 1, 10, 15);
+    Triangle* pTriObj = new Triangle(2, 2, 3, 4, 5);
+    Circle* pCircObj = new Circle(0, 0, 3.14);
 
     const int arrSize = 3;
     float sumOfSq = 0;
