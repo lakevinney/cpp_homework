@@ -8,41 +8,61 @@ using namespace std;
 //============================Task14=====================================
 char* PassGen(int length)
 {
-    const char upper[] = "ABCDEFGHIJKLMNOPQRSTUWXYZ";
-    const char lower[] = "abcdefghijklmnopqrstuwxyz";
-    const char digAndSym[] = "0123456789_";
-    bool isUp = false, isLow = false, isDig = false;
+    const char* symbols[] = {
+        "ABCDEFGHIJKLMNOPQRSTUWXYZ",
+        "abcdefghijklmnopqrstuwxyz",
+        "0123456789_"
+    };
+
+    bool checkPass[] = {false, false, false};
 
     char* pass = new char[length];
 
-    while((isUp == false) || (isLow == false) || (isDig == false))
-    {
-        for(int i = 0; i != length; ++i)
+    while((checkPass[0] == false) || (checkPass[1] == false) || (checkPass[2] == false))
+
+        for(size_t i = 0; i != length; ++i)
         {
-           int choice = 0;
-           choice = 1 + rand()%3;
-
-           switch(choice)
-           {
-
-            case 1:
-               pass[i] = upper[rand()% strlen(upper)];
-               isUp = true;
-               break;
-
-            case 2:
-               pass[i] = lower[rand()% strlen(lower)];
-               isLow = true;
-               break;
-
-            case 3:
-               pass[i] = digAndSym[rand()% strlen(digAndSym)];
-               isDig = true;
-               break;
-           }
+            int choice = 0;
+            choice = rand()%3;
+            const char* component = symbols[choice];
+            pass[i] = component[rand()% strlen(component)];
+            checkPass[choice] = true;
         }
+//    const char upper[] = "ABCDEFGHIJKLMNOPQRSTUWXYZ";
+//    const char lower[] = "abcdefghijklmnopqrstuwxyz";
+//    const char digAndSym[] = "0123456789_";
+//    bool isUp = false, isLow = false, isDig = false;
 
-    }
+//    char* pass = new char[length];
+
+//    while((isUp == false) || (isLow == false) || (isDig == false))
+//    {
+//        for(int i = 0; i != length; ++i)
+//        {
+//           int choice = 0;
+//           choice = 1 + rand()%3;
+
+//           switch(choice)
+//           {
+
+//            case 1:
+//               pass[i] = upper[rand()% strlen(upper)];
+//               isUp = true;
+//               break;
+
+//            case 2:
+//               pass[i] = lower[rand()% strlen(lower)];
+//               isLow = true;
+//               break;
+
+//            case 3:
+//               pass[i] = digAndSym[rand()% strlen(digAndSym)];
+//               isDig = true;
+//               break;
+//           }
+//        }
+
+//    }
     return pass;
 }
 
@@ -107,7 +127,7 @@ int main()
         cout<<endl;
     }
     cout<<"==================================================================="<<endl;
-//    return 0;
+    return 0;
     //============================Task15=====================================
     int n,m;
     cout<<"Enter the numbers of rows and columns of the matrix (n,m): ";
