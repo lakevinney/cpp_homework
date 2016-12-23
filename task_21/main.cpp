@@ -22,10 +22,9 @@ public:
 
     }
 
-    Shape(const float x, const float y)
+    Shape(float x, float y) :  m_x(x), m_y(y)
     {
-        m_x = x;
-        m_y = y;
+
         cout << __PRETTY_FUNCTION__ << endl;
     }
 
@@ -51,13 +50,12 @@ public:
 
     }
 
-    Rectangle(const float x, const float y, \
-              const float width, const float height) : \
-        Shape(x, y)
+    Rectangle(float x, float y, \
+              float width, float height) : \
+        Shape(x, y), m_width(width), m_height(height)
     {
         cout << __PRETTY_FUNCTION__ << endl;
-        m_width = width;
-        m_height = height;
+
     }
 
     ~Rectangle()
@@ -87,14 +85,12 @@ public:
 
     }
 
-    Triangle(const float x, const float y, \
-             const float a, const float b, const float c) : \
-        Shape(x, y)
+    Triangle(float x, float y, \
+             float a, float b, float c) : \
+        Shape(x, y), m_sideA(a), m_sideB(b), m_sideC(c)
     {
         cout << __PRETTY_FUNCTION__ << endl;
-        m_sideA = a;
-        m_sideB = b;
-        m_sideC = c;
+
     }
 
     ~Triangle()
@@ -122,7 +118,7 @@ public:
 
     }
 
-    Circle(const float x, const float y, const float r) : Shape(x, y)
+    Circle(float x, float y, float r) : Shape(x, y)
     {
         cout << __PRETTY_FUNCTION__ << endl;
         m_radius = r;
@@ -147,6 +143,7 @@ int main()
     Rectangle* pRectObj = new Rectangle(1, 1, 10, 15);
     Triangle* pTriObj = new Triangle(2, 2, 3, 4, 5);
     Circle* pCircObj = new Circle(0, 0, 3.14);
+
 
     const int arrSize = 3;
     float sumOfSq = 0;
