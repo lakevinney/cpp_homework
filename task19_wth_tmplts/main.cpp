@@ -16,12 +16,12 @@ void PrintArray(T* arr, size_t size)
 //-------------------------Map--------------------------------------
 
 template<typename T>
-void Map(T (*pFunc)(T&, T&), T* arr, size_t size)
+void Map(T (*pFunc)(T&), T* arr, size_t size)
 {
     cout << __PRETTY_FUNCTION__ << endl;
 
-    for(size_t i = 1; i != size; ++i)
-        arr[i] = pFunc(arr[0], arr[i]);
+    for(size_t i = 0; i != size; ++i)
+        arr[i] = pFunc(arr[i]);
 }
 
 template<typename T>
@@ -49,22 +49,33 @@ T Sum(T& lhs, T& rhs)
 }
 
 template<typename T>
-T Mult(T& lhs, T& rhs)
+T ByTen(T& elem)
 {
-   return lhs * rhs;
+    return elem * 10;
 }
 
+template<typename T>
+T PlusSelf(T& elem)
+{
+    return elem + elem;
+}
+
+template<typename T>
+T Square(T& elem)
+{
+    return elem * elem;
+}
 //-------------------------Filter--------------------------------------
 
 template<typename T>
-T* Filter(bool (*pFunc)(T&, T&), T* arr, int size, int& newSize)
+T* Filter(bool (*pFunc)(T&), T* arr, int size, int& newSize)
 {
     cout << __PRETTY_FUNCTION__ << endl;
 
     newSize = 0;
     T* newArr = new T[size];
     for(int i = 0; i < size; i++)
-        if(pFunc(arr[i], arr[size/2]) == true)
+        if(pFunc(arr[i]))
         {
             newArr[newSize] = arr[i];
             newSize++;
@@ -75,15 +86,15 @@ T* Filter(bool (*pFunc)(T&, T&), T* arr, int size, int& newSize)
 }
 
 template<typename T>
-bool GreaterThan(T& lhs, T& rhs)
+bool IsPositive(T& value)
 {
-    return lhs > rhs;
+    return value > 0;
 }
 
 template<typename T>
-bool LessOrEq(T& lhs, T& rhs)
+bool IsNegative(T& value)
 {
-    return !GreaterThan(lhs, rhs);
+    return value < 0;
 }
 
 //-------------------------Reduce--------------------------------------
@@ -117,16 +128,16 @@ int main()
 
     //using namespace map;
 
-    Map<float>(Sum, a1, ARRAY_SIZE(a1));
+    Map<float>(PlusSelf, a1, ARRAY_SIZE(a1));
     PrintArray(a1, ARRAY_SIZE(a1));
 
-    Map<int>(Sum, a2, ARRAY_SIZE(a2));
+    Map<int>(ByTen, a2, ARRAY_SIZE(a2));
     PrintArray(a2, ARRAY_SIZE(a2));
 
-    Map<float>(Mult, a1, ARRAY_SIZE(a1));
-    PrintArray(a1, ARRAY_SIZE(a1));
+//    Map<float>(Square, a1, ARRAY_SIZE(a1));
+//    PrintArray(a1, ARRAY_SIZE(a1));
 
-    Map<int>(Mult, a2, ARRAY_SIZE(a2));
+    Map<int>(PlusSelf, a2, ARRAY_SIZE(a2));
     PrintArray(a2, ARRAY_SIZE(a2));
 
     Map<string>(a3, a3.length());
@@ -144,19 +155,19 @@ int main()
 
     int newSize;
 
-    int* p1 = Filter<int>(GreaterThan, a2, ARRAY_SIZE(a2), newSize);
+    int* p1 = Filter<int>(IsPositive, a2, ARRAY_SIZE(a2), newSize);
     PrintArray(p1, newSize);
     delete[] p1;
 
-    int* p2 = Filter<int>(LessOrEq, a2, ARRAY_SIZE(a2), newSize);
+    int* p2 = Filter<int>(IsNegative, a2, ARRAY_SIZE(a2), newSize);
     PrintArray(p2, newSize);
     delete[] p2;
 
-    float* p3 = Filter<float>(GreaterThan, a1, ARRAY_SIZE(a1), newSize);
+    float* p3 = Filter<float>(IsPositive, a1, ARRAY_SIZE(a1), newSize);
     PrintArray(p3, newSize);
     delete[] p3;
 
-    float* p4 = Filter<float>(LessOrEq, a1, ARRAY_SIZE(a1), newSize);
+    float* p4 = Filter<float>(IsNegative, a1, ARRAY_SIZE(a1), newSize);
     PrintArray(p4, newSize);
     delete[] p4;
 
