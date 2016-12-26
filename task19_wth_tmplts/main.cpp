@@ -16,7 +16,7 @@ void PrintArray(T* arr, size_t size)
 //-------------------------Map--------------------------------------
 
 template<typename T>
-void Map(T (*pFunc)(T&), T* arr, size_t size)
+void Map(T (*pFunc)(const T&), T* arr, size_t size)
 {
     cout << __PRETTY_FUNCTION__ << endl;
 
@@ -43,32 +43,32 @@ void Map<string>(string& data, size_t size)
 }
 
 template<typename T>
-T Sum(T& lhs, T& rhs)
+T Sum(const T& lhs, const T& rhs)
 {
    return lhs + rhs;
 }
 
 template<typename T>
-T ByTen(T& elem)
+T ByTen(const T& elem)
 {
     return elem * 10;
 }
 
 template<typename T>
-T PlusSelf(T& elem)
+T PlusSelf(const T& elem)
 {
     return elem + elem;
 }
 
 template<typename T>
-T Square(T& elem)
+T Square(const T& elem)
 {
     return elem * elem;
 }
 //-------------------------Filter--------------------------------------
 
 template<typename T>
-T* Filter(bool (*pFunc)(T&), T* arr, int size, int& newSize)
+T* Filter(bool (*pFunc)(const T&), T* arr, int size, int& newSize)
 {
     cout << __PRETTY_FUNCTION__ << endl;
 
@@ -86,13 +86,13 @@ T* Filter(bool (*pFunc)(T&), T* arr, int size, int& newSize)
 }
 
 template<typename T>
-bool IsPositive(T& value)
+bool IsPositive(const T& value)
 {
     return value > 0;
 }
 
 template<typename T>
-bool IsNegative(T& value)
+bool IsNegative(const T& value)
 {
     return value < 0;
 }
@@ -100,7 +100,7 @@ bool IsNegative(T& value)
 //-------------------------Reduce--------------------------------------
 
 template<typename T>
-T Reduce(T (*pFunc)(T&, T&), T* arr, size_t size)
+T Reduce(T (*pFunc)(const T&, const T&), T* arr, size_t size)
 {
     cout << __PRETTY_FUNCTION__ << endl;
     for(size_t i = 1; i < size; i++)
