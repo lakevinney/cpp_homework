@@ -19,6 +19,8 @@ private:
         return *this;
     }
 
+
+
 public:
     ImmutableBuffer(): m_array(NULL), m_size(0)
     {
@@ -33,12 +35,13 @@ public:
             m_array[i] = arr[i];
     }
 
-
-    ImmutableBuffer(const ImmutableBuffer& obj)
+    ImmutableBuffer(const ImmutableBuffer& obj) :m_array(new T[obj.m_size]) \
+        ,m_size(obj.m_size)
     {
-        cout << __PRETTY_FUNCTION__ << endl;
-        m_array = obj.m_array;
-        m_size = obj.m_size;
+        for(size_t i = 0; i != obj.m_size; ++i)
+
+            m_array[i] = obj.m_array[i];
+
     }
 
     ~ImmutableBuffer()
