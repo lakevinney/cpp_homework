@@ -62,7 +62,7 @@ public:
         cout << __PRETTY_FUNCTION__ << endl;
     }
 
-    HTMLButtonElement(unsigned wid, unsigned hei, unsigned hid, const string& title) : HTMLElement(wid, hei, hid), m_title(title)
+    HTMLButtonElement(unsigned wid, unsigned hei, bool hid, const string& title) : HTMLElement(wid, hei, hid), m_title(title)
     {
         cout << __PRETTY_FUNCTION__ << endl;
     }
@@ -105,7 +105,7 @@ public:
         cout << __PRETTY_FUNCTION__ << endl;
     }
 
-    HTMLImageElement(unsigned wid, unsigned hei, unsigned hid, const string& url) : HTMLElement(wid, hei, hid), m_url(url)
+    HTMLImageElement(unsigned wid, unsigned hei, bool hid, const string& url) : HTMLElement(wid, hei, hid), m_url(url)
     {
         cout << __PRETTY_FUNCTION__ << endl;
     }
@@ -149,7 +149,7 @@ public:
         cout << __PRETTY_FUNCTION__ << endl;
     }
 
-    HTMLTextAreaElement(unsigned wid, unsigned hei, unsigned hid, const string& content) : HTMLElement(wid, hei, hid), m_content(content)
+    HTMLTextAreaElement(unsigned wid, unsigned hei, bool hid, const string& content) : HTMLElement(wid, hei, hid), m_content(content)
     {
         cout << __PRETTY_FUNCTION__ << endl;
     }
