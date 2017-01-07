@@ -48,20 +48,25 @@ T Sum(const T& lhs, const T& rhs)
    return lhs + rhs;
 }
 
-template<typename T>
-T ByTen(const T& elem)
+//template<typename T>
+int ByTen(const int& elem)
 {
     return elem * 10;
 }
 
-template<typename T>
-T PlusSelf(const T& elem)
+float ByTen(const float& elem)
+{
+    return elem * 10;
+}
+
+//template<typename T>
+int PlusSelf(const int& elem)
 {
     return elem + elem;
 }
 
-template<typename T>
-T Square(const T& elem)
+//template<typename T>
+float Square(const float& elem)
 {
     return elem * elem;
 }
@@ -128,14 +133,14 @@ int main()
 
     //using namespace map;
 
-    Map<float>(PlusSelf, a1, ARRAY_SIZE(a1));
-    PrintArray(a1, ARRAY_SIZE(a1));
+//    Map<float>(PlusSelf, a1, ARRAY_SIZE(a1));
+//    PrintArray(a1, ARRAY_SIZE(a1));
 
     Map<int>(ByTen, a2, ARRAY_SIZE(a2));
     PrintArray(a2, ARRAY_SIZE(a2));
 
-//    Map<float>(Square, a1, ARRAY_SIZE(a1));
-//    PrintArray(a1, ARRAY_SIZE(a1));
+    Map<float>(Square, a1, ARRAY_SIZE(a1));
+    PrintArray(a1, ARRAY_SIZE(a1));
 
     Map<int>(PlusSelf, a2, ARRAY_SIZE(a2));
     PrintArray(a2, ARRAY_SIZE(a2));
