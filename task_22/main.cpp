@@ -52,6 +52,8 @@ public:
     String& operator=(const String& rhs)
     {
 
+//       cout << __PRETTY_FUNCTION__ << endl;
+
        if (&rhs != this)
        {
            String tmp(rhs);
@@ -78,7 +80,7 @@ public:
         return *this;
     }
 
-    String& operator+(const String& obj)
+    String& operator+=(const String& obj)
     {
         char* tmpBuffer = new char[strlen(m_buffer) + strlen(obj.m_buffer) + 1];
         strcpy(tmpBuffer, m_buffer);
@@ -95,6 +97,16 @@ public:
     const char& operator[](size_t idx)const
     {
         return m_buffer[idx];
+    }
+
+    void SetElem(size_t idx, const char& c)
+    {
+       if(idx != strlen(m_buffer))
+       {
+           String tmp(*this);
+           tmp.m_buffer[idx] = c;
+           *this = tmp;
+       }
     }
 
     ~String()
@@ -115,6 +127,13 @@ public:
 
 };
 
+String operator+(const String& lhs, const String& rhs)
+{
+    String tmp(lhs);
+    tmp += rhs;
+
+    return tmp;
+}
 
 int main()
 {
@@ -139,16 +158,21 @@ int main()
 
     assert(s1.GetCount()==1);
 
-    String s3 = "def";
+    String s3 = "def";    
+    s3.SetElem(3, 'e');
     cout << s3.GetBuffer() << endl;
     assert(s1.GetCount()==1 && s3.GetCount()==1);
 
-    s1 = s1 + s3;
+    s1 += s3;
     assert(s1.GetCount()==1 && s3.GetCount()==1);
 
     {
         String s4 = s1;
         assert(s1.GetCounterAddr() == s4.GetCounterAddr());
+
+        String s5;
+        s5 = s3 + s4;
+        cout << s5.GetBuffer() << endl;
 
     }
 
