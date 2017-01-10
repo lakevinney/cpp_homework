@@ -101,7 +101,7 @@ public:
 
     void SetElem(size_t idx, const char& c)
     {
-       if(idx != strlen(m_buffer))
+       if(idx < strlen(m_buffer))
        {
            String tmp(*this);
            tmp.m_buffer[idx] = c;
@@ -159,7 +159,7 @@ int main()
     assert(s1.GetCount()==1);
 
     String s3 = "def";    
-    s3.SetElem(3, 'e');
+    s3.SetElem(0, 'e');
     cout << s3.GetBuffer() << endl;
     assert(s1.GetCount()==1 && s3.GetCount()==1);
 
