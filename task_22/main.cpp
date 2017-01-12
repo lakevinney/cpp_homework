@@ -103,9 +103,16 @@ public:
     {
        if(idx < strlen(m_buffer))
        {
-           String tmp(*this);
+           char* tmpBuffer = new char[strlen(m_buffer) + 1];
+           strcpy(tmpBuffer, m_buffer);
+           String tmp(tmpBuffer);
            tmp.m_buffer[idx] = c;
+
            *this = tmp;
+           delete[] tmpBuffer;
+//           String tmp(*this);
+//           tmp.m_buffer[idx] = c;
+//           *this = tmp;
        }
     }
 
@@ -143,7 +150,7 @@ int main()
     assert(s1.GetCount()==1);
 
     {
-        String s2 = s1;
+        String s2 = s1;        
 //        cout << s2.GetBuffer() << endl;
         assert(s1.GetCount()==2);
         assert(s2.GetCount()==2);
@@ -169,6 +176,11 @@ int main()
     {
         String s4 = s1;
         assert(s1.GetCounterAddr() == s4.GetCounterAddr());
+
+        s4.SetElem(0, 'x');
+        assert(strcmp(s1.GetBuffer(), "abceef")==0);
+        assert(s4.GetCount() == 1);
+        assert(s1.GetCount() == 1);
 
         String s5;
         s5 = s3 + s4;
