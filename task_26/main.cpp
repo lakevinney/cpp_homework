@@ -7,12 +7,12 @@ class Device
 
 public:
 
-    Device() : m_brand("unknown"), m_status("off")
+    Device() : m_brand("unknown"), m_isOn(false)
     {
         cout << __PRETTY_FUNCTION__ << endl;
     }
 
-    Device(const string& brand, const string& status): m_brand(brand), m_status(status)
+    Device(const string& brand, bool status): m_brand(brand), m_isOn(status)
     {
         cout << __PRETTY_FUNCTION__ << endl;
     }
@@ -24,20 +24,20 @@ public:
 
     void TurnOn()
     {
-        m_status = "on";
+        m_isOn = true;
     }
 
     void TurnOff()
     {
-        m_status = "off";
+        m_isOn = false;
     }
 
-    virtual const string& GetStatus()=0;
+    virtual bool GetStatus()const=0;
 
  protected:
 
     string m_brand;
-    string m_status;
+    bool m_isOn;
 
 };
 
@@ -51,14 +51,14 @@ public:
         cout << __PRETTY_FUNCTION__ << endl;
     }
 
-    Printer(const string& brand, const string& status, const string& type) :
+    Printer(const string& brand, bool status, const string& type) :
         Device(brand, status), m_type(type)
     {
         cout << __PRETTY_FUNCTION__ << endl;
     }
 
     Printer(const Printer& rhs) :
-        Device(rhs.m_brand, rhs.m_status), m_type(rhs.m_type)
+        Device(rhs.m_brand, rhs.m_isOn), m_type(rhs.m_type)
     {
         cout << __PRETTY_FUNCTION__ << endl;
     }
@@ -70,16 +70,16 @@ public:
 
     void Print()
     {
-        if(GetStatus() != "off")
+        if(GetStatus() != false)
             cout << "Printing..." << endl;
         else
             cout << "Turn your device on!" << endl;
     }
 
-    const string& GetStatus() override
+    bool GetStatus() const override
     {
 //        cout << __PRETTY_FUNCTION__ << endl;
-        return m_status;
+        return m_isOn;
     }
 
 protected:
@@ -97,13 +97,13 @@ public:
       cout << __PRETTY_FUNCTION__ << endl;
     }
 
-    Scanner(const string& brand, const string& status) :
+    Scanner(const string& brand, bool status) :
         Device(brand, status)
     {
         cout << __PRETTY_FUNCTION__ << endl;
     }
 
-    Scanner(const Scanner& rhs) : Device(rhs.m_brand, rhs.m_status)
+    Scanner(const Scanner& rhs) : Device(rhs.m_brand, rhs.m_isOn)
     {
         cout << __PRETTY_FUNCTION__ << endl;
     }
@@ -115,16 +115,16 @@ public:
 
     void Scan()
     {
-        if(GetStatus() != "off")
+        if(GetStatus() != false)
             cout << "Scanning..." << endl;
         else
             cout << "Turn your device on!" << endl;
     }
 
-    const string& GetStatus() override
+    bool GetStatus() const override
     {
 //        cout << __PRETTY_FUNCTION__ << endl;
-        return m_status;
+        return m_isOn;
     }
 };
 
@@ -139,7 +139,7 @@ public:
        cout << __PRETTY_FUNCTION__ << endl;
     }
 
-    MFU(const string& brand, const string& status, const string& type) :
+    MFU(const string& brand, bool status, const string& type) :
         Device(brand, status), Printer(brand, status, type),
         Scanner(brand, status)
     {
@@ -147,8 +147,8 @@ public:
     }
 
     MFU(const MFU& rhs):
-        Device(rhs.m_brand, rhs.m_status), Printer(rhs.m_brand, rhs.m_status, rhs.m_type),
-        Scanner(rhs.m_brand, rhs.m_status)
+        Device(rhs.m_brand, rhs.m_isOn), Printer(rhs.m_brand, rhs.m_isOn, rhs.m_type),
+        Scanner(rhs.m_brand, rhs.m_isOn)
     {
        cout << __PRETTY_FUNCTION__ << endl;
     }
@@ -158,34 +158,34 @@ public:
         cout << __PRETTY_FUNCTION__ << endl;
     }
 
-    const string& GetStatus() override
+    bool GetStatus() const override
     {
 //        cout << __PRETTY_FUNCTION__ << endl;
-        return m_status;
+        return m_isOn;
     }
 };
 
 int main()
 {
-    Printer p("Canon", "on", "Inkjet");
-    Scanner s("Epson", "off");
-    MFU m("HP", "off", "Laser");
+    Printer p("Canon", true, "Inkjet");
+    Scanner s("Epson", false);
+    MFU m("HP", false, "Laser");
 
     p.Print();
     p.TurnOff();
-    assert(p.GetStatus() == "off");
+    assert(p.GetStatus() == false);
 
     s.Scan();
     s.TurnOn();
-    assert(s.GetStatus() == "on");
+    assert(s.GetStatus() == true);
     s.Scan();
 
     m.TurnOn();
-    assert(m.GetStatus() == "on");
+    assert(m.GetStatus() == true);
     m.Print();
     m.Scan();
     m.TurnOff();
-    assert(m.GetStatus() == "off");
+    assert(m.GetStatus() == false);
 
     return 0;
 }
