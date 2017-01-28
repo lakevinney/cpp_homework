@@ -1,0 +1,2 @@
+Welcome to another installment of C9 Lectures covering the powerful general C++ library, STL. Joining us once again is the great Stephan T. Lavavej, Microsoft's keeper of the STL cloth (this means he manages the partnership between the owners of STL (dinkumware) and Microsoft, including, of course, bug fixes and enhancements to the STL that ships as part of Visual C++). Simply, Stephan is a C++ library developer.
+
