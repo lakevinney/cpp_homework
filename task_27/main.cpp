@@ -70,12 +70,9 @@ struct TextAnalyzer
         std::transform(word.begin(), word.end(), word.begin(), ::tolower);
     }
 
-    const string Filter(const string& elem)
+    void Filter(string& elem)
     {
-        string tmp = elem;
-        tmp.erase(remove_if(tmp.begin(), tmp.end(), [](const char& c){return !isalpha(c);}), tmp.end());
-
-        return tmp;
+        elem.erase(remove_if(elem.begin(), elem.end(), [](const char& c){return !isalpha(c);}), elem.end());
     }
 
     void CountWords()
@@ -103,6 +100,9 @@ struct TextAnalyzer
             "a",
             "an",
             "the",
+            "him",
+            "his",
+            "her",
             "was",
             "were",
             "what",
@@ -151,12 +151,13 @@ struct TextAnalyzer
             "one"
         };
 
+        for_each(m_text.begin(), m_text.end(), [&](string& w){Filter(w);});
         for(auto i = m_text.begin(); i != m_text.end(); ++i)
              {
                 auto it = find(exc.begin(), exc.end(), *i);
                 if(it == exc.end())
 
-                    ++m_countTable[Filter(*i)];
+                    ++m_countTable[*i];
 
             }
 
@@ -185,6 +186,14 @@ struct TextAnalyzer
                 ++it;
             }
 
+        }
+
+        else
+        {
+            for(auto i  = sorted.rbegin(); i != sorted.rend(); ++i)
+            {
+                cout << i->first << ": " << i->second << endl;
+            }
         }
 
     }
