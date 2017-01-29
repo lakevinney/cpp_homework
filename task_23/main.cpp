@@ -303,9 +303,6 @@ public:
         return old;
     }
 
-    friend ostream& operator<<(ostream& os, const RomanNumber&);
-    friend istream& operator>>(istream& is, RomanNumber&);
-
     explicit operator int() const
     {
         return m_numeral;
@@ -365,9 +362,10 @@ ostream& operator<<(ostream& os, const RomanNumber& obj)
 
 istream& operator>>(istream &is, RomanNumber& obj)
 {
-    is >> obj.m_roman;
-    std::transform(obj.m_roman.begin(), obj.m_roman.end(), obj.m_roman.begin(), ::toupper);
-    obj.m_numeral = obj.ToArabic(obj.m_roman);
+
+    string roman;
+    is >> roman;
+    obj = roman;
 
     return is;
 }
@@ -386,9 +384,9 @@ int main()
 
     r1 -= r2;
     cout << r1;
-//    RomanNumber r3;
-//    cin >> r3;
-//    cout << r3;
+    RomanNumber r3;
+    cin >> r3;
+    cout << r3;
 //    cout << int(r3) << endl;
 
 
