@@ -177,23 +177,10 @@ struct TextAnalyzer
     {
         multimap<int, string> sorted = FlipMap(m_countTable);
 
-        if(n <= sorted.size())
+        auto it = sorted.rbegin();
+        for(size_t i  = 0; i < min(n, sorted.size()); ++it, ++i)
         {
-            auto it = sorted.rbegin();
-            for(size_t i  = 0; i != n; ++i)
-            {
-                cout << it->first << ": " << it->second << endl;
-                ++it;
-            }
-
-        }
-
-        else
-        {
-            for(auto i  = sorted.rbegin(); i != sorted.rend(); ++i)
-            {
-                cout << i->first << ": " << i->second << endl;
-            }
+            cout << it->first << ": " << it->second << endl;
         }
 
     }
