@@ -47,11 +47,6 @@ public:
         return m_numeral;
     }
 
-    const bool& IsSync() const
-    {
-        return m_synchronized;
-    }
-
     static const string ToRoman(int arabic)
     {
 
@@ -92,12 +87,11 @@ public:
         int prvs = 0;
 
         for(auto i = rom.rbegin(); i != rom.rend(); ++i)
-
-           for(auto j = dConvert.begin(); j != dConvert.end(); ++j)
-
-               if(*i == j->first)
-               {
-                  if(j->second >= prvs)
+        {
+            auto j = dConvert.find(*i);
+            if(j != dConvert.end())
+            {
+                if(j->second >= prvs)
                   {
                     res += j->second;
                     prvs = j->second;
@@ -106,7 +100,8 @@ public:
                   else
 
                     res -= j->second;
-               }
+            }
+        }
 
         return res;
     }
@@ -141,10 +136,8 @@ public:
 
     RomanNumber& operator+=(const RomanNumber& rhs)
     {
-        m_numeral += rhs.m_numeral;
         m_synchronized = false;
-
-        return *this;
+        return (*this += rhs.m_numeral);
     }
 
     RomanNumber& operator+=(const int& rhs)
@@ -157,10 +150,8 @@ public:
 
     RomanNumber& operator-=(const RomanNumber& rhs)
     {
-        m_numeral -= rhs.m_numeral;
         m_synchronized = false;
-
-        return *this;
+        return (*this -= rhs.m_numeral);
     }
 
     RomanNumber& operator-=(const int& rhs)
@@ -173,10 +164,8 @@ public:
 
     RomanNumber& operator*=(const RomanNumber& rhs)
     {
-        m_numeral *= rhs.m_numeral;
         m_synchronized = false;
-
-        return *this;
+        return (*this *= rhs.m_numeral);
     }
 
     RomanNumber& operator*=(const int& rhs)
@@ -189,10 +178,8 @@ public:
 
     RomanNumber& operator/=(const RomanNumber& rhs)
     {
-        m_numeral /= rhs.m_numeral;
         m_synchronized = false;
-
-        return *this;
+        return (*this /= rhs.m_numeral);
     }
 
     RomanNumber& operator/=(const int& rhs)
@@ -329,6 +316,12 @@ private:
     mutable string m_roman;
     int m_numeral;
     mutable bool m_synchronized;
+
+    const bool& IsSync() const
+    {
+        return m_synchronized;
+    }
+
 };
 
 //RomanNumber operator+(const RomanNumber& lhs, const RomanNumber& rhs)
@@ -391,10 +384,8 @@ int main()
     assert(r1 >  r2);
     assert(r1 != r2);
 
-    r1 += r2;
-    assert(!r1.IsSync());
+    r1 -= r2;
     cout << r1;
-    assert(r1.IsSync());
 //    RomanNumber r3;
 //    cin >> r3;
 //    cout << r3;
