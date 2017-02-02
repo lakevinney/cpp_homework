@@ -103,16 +103,10 @@ public:
     {
        if(idx < strlen(m_buffer))
        {
-           char* tmpBuffer = new char[strlen(m_buffer) + 1];
-           strcpy(tmpBuffer, m_buffer);
-           String tmp(tmpBuffer);
+           String tmp(m_buffer);
            tmp.m_buffer[idx] = c;
+           swap(tmp);
 
-           *this = tmp;
-           delete[] tmpBuffer;
-//           String tmp(*this);
-//           tmp.m_buffer[idx] = c;
-//           *this = tmp;
        }
     }
 
@@ -177,8 +171,9 @@ int main()
         String s4 = s1;
         assert(s1.GetCounterAddr() == s4.GetCounterAddr());
 
-        s4.SetElem(0, 'x');
+        s4.SetElem(0, 'X');
         assert(strcmp(s1.GetBuffer(), "abceef")==0);
+        assert(strcmp(s4.GetBuffer(), "Xbceef")==0);
         assert(s4.GetCount() == 1);
         assert(s1.GetCount() == 1);
 
