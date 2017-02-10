@@ -40,7 +40,6 @@ int main()
             dlist.push_back(1);
             dlist.push_back(2);
             dlist.push_back(3);
-            dlist.push_back(4);
 
             // TEST should pass when methods are implemented
 
@@ -51,8 +50,8 @@ int main()
             }
 
             cout << "dlist: " << dlist << endl;
-////            my::list<int> dlist2 = dlist;
-////            cout << "dlist2: " << dlist2 << endl;
+            my::list<int> dlist2 = dlist;
+            cout << "dlist2: " << dlist2 << endl;
 
 ////            assert(dlist.back() ==dlist2.back());
 ////            assert(dlist.front()==dlist2.front());
@@ -66,13 +65,13 @@ int main()
 ////            cout << *(dlist.rbegin()) << endl;
 ////            assert(dlist.back() ==*(dlist.rbegin()));
 
-////            dlist.pop_back();
-////            cout << "popped back: " << dlist << endl;
-////            assert(dlist.empty()==false);
+            dlist.pop_back();
+            cout << "popped back: " << dlist << endl;
+            assert(dlist.empty()==false);
 
-////            dlist.pop_front();
-////            cout << "popped front: " << dlist << endl;
-////            assert(dlist.empty()==false);
+            dlist.pop_front();
+            cout << "popped front: " << dlist << endl;
+            assert(dlist.empty()==false);
 
 ////            dlist.pop_front();
 ////            cout << "popped front: " << dlist << endl;

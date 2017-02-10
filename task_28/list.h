@@ -168,7 +168,14 @@ public:
 
     T pop_back()
     {
-        //...
+        T data = tail->data;
+        list_Node<T>* tmp = tail->prev;
+        delete tail;
+        tail = tmp;
+
+        update_tail();
+        update_sentinel();
+        return data;
     }
 
     void reverse()
@@ -194,20 +201,9 @@ public:
         update_sentinel();
     }
 
-    void push_back(T elem)
+    void push_back(const T& elem)
     {
-        list_Node<T>* tmp = new list_Node<T>{elem, nullptr, sentinel};
-        if (head == sentinel)
-        {
-            head = tmp;
-        }
-
-        else
-            tail->next = tmp;
-
-        tail = tmp;
-        update_tail();
-        update_sentinel();
+       ///
     }
 
     iterator begin()
