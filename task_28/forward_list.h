@@ -150,7 +150,21 @@ public:
 
     void reverse()
     {
-        // ...
+        if (empty()) return;
+
+        fwd_list_Node<T>* prev = nullptr;
+        fwd_list_Node<T>* current = head;
+        fwd_list_Node<T>* next;
+
+        while(current != nullptr)
+        {
+            next = current->next;
+            current->next = prev;
+            prev = current;
+            current = next;
+        }
+
+        head = prev;
     }
 
     iterator begin()

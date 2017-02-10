@@ -108,6 +108,18 @@ class list
         }
     }
 
+    void update_head()
+    {
+        if (sentinel == tail)
+        {
+            head = tail;
+        }
+        if (sentinel == head)
+        {
+            head = tail;
+        }
+    }
+
 public:
     typedef list_iterator<T> iterator;
     typedef list_iterator<T, const T> const_iterator;
@@ -174,7 +186,7 @@ public:
         delete tail;
         tail = tmp;
 
-        update_tail();
+        update_head();
         update_sentinel();
         return data;
     }
@@ -215,10 +227,42 @@ public:
         update_sentinel();
     }
 
+    void push_front(const T&& value)
+    {
+        list_Node<T>* tmp = new list_Node<T>{std::move(value), nullptr, sentinel};
+        if (head != sentinel)
+        {
+            tmp->next = head;
+            head->prev = tmp;
+        }
+        head = tmp;
+        update_tail();
+        update_sentinel();
+    }
+
     void push_back(const T& elem)
     {
 
         list_Node<T>* tmp = new list_Node<T>{elem, nullptr, sentinel};
+
+        if(!empty())
+        {
+            tmp->prev = tail;
+            tail->next = tmp;
+            tail = tmp;
+        }
+        else
+             head = tmp;
+
+        update_tail();
+        update_sentinel();
+
+    }
+
+    void push_back(const T&& elem)
+    {
+
+        list_Node<T>* tmp = new list_Node<T>{std::move(elem), nullptr, sentinel};
 
         if(!empty())
         {
