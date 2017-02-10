@@ -5,3 +5,7 @@ CONFIG -= qt
 
 SOURCES += main.cpp
 
+HEADERS += \
+    list.h \
+    forward_list.h
+
