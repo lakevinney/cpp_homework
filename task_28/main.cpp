@@ -53,17 +53,17 @@ int main()
             my::list<int> dlist2 = dlist;
             cout << "dlist2: " << dlist2 << endl;
 
-////            assert(dlist.back() ==dlist2.back());
-////            assert(dlist.front()==dlist2.front());
+            assert(dlist.back() ==dlist2.back());
+            assert(dlist.front()==dlist2.front());
 
-////            cout << "--reversed--" << endl;
-////            for(auto it = dlist.rbegin(); it!=dlist.rend(); ++it)
-////            {
-////                cout << *it << endl;
-////            }
+            cout << "--reversed--" << endl;
+            for(auto it = dlist.rbegin(); it!=dlist.rend(); ++it)
+            {
+                cout << *it << endl;
+            }
 
-////            cout << *(dlist.rbegin()) << endl;
-////            assert(dlist.back() ==*(dlist.rbegin()));
+            cout << *(dlist.rbegin()) << endl;
+            assert(dlist.back() ==*(dlist.rbegin()));
 
             dlist.pop_back();
             cout << "popped back: " << dlist << endl;
@@ -73,24 +73,25 @@ int main()
             cout << "popped front: " << dlist << endl;
             assert(dlist.empty()==false);
 
-////            dlist.pop_front();
-////            cout << "popped front: " << dlist << endl;
-////            assert(dlist.empty()==true);
+            dlist.pop_front();
+            cout << "popped front: " << dlist << endl;
+            assert(dlist.empty()==true);
 
-////            dlist.push_front(11);
-////            auto it = dlist.begin();
-////            *(it) = 42;
-////            cout << "push & modify: " << dlist << endl;
+            dlist.push_front(11);
+            auto it = dlist.begin();
+            *(it) = 42;
+            cout << "push & modify: " << dlist << endl;
 
-////            assert(*(  dlist.begin())   ==dlist.front());
-////            assert(*(--dlist.end())     ==dlist.back());
-////            assert(*(  dlist.rbegin())  ==dlist.back());
-////            assert(*(--dlist.rend())    ==dlist.front());
-////            assert(42 == dlist.front());
+            assert(*(  dlist.begin())   ==dlist.front());
+            assert(*(--dlist.end())     ==dlist.back());
+            assert(*(  dlist.rbegin())  ==dlist.back());
+            assert(*(--dlist.rend())    ==dlist.front());
+            assert(42 == dlist.front());
 
-////            dlist.pop_back();
-////            cout << "popped back: " << dlist << endl;
-////            assert(dlist.empty()==true);
+            //------------After popping last element list still contains trash
+            cout << dlist.pop_back() << endl;
+            cout << "popped back: " << dlist << endl;
+            assert(dlist.empty()==true);
 
         }
 

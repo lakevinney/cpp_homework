@@ -170,6 +170,7 @@ public:
     {
         T data = tail->data;
         list_Node<T>* tmp = tail->prev;
+
         delete tail;
         tail = tmp;
 
@@ -180,7 +181,20 @@ public:
 
     void reverse()
     {
-        //...
+        if (empty()) return;
+
+        list_Node<T>* cur = head;
+        list_Node<T>* tmp = head;
+        while (cur != sentinel)
+        {
+            std::swap(cur->next, cur->prev);
+            cur = cur->prev;
+        }
+
+        head = cur->prev;
+        tail = tmp;
+        update_tail();
+        update_sentinel();
     }
 
     bool empty()
@@ -203,7 +217,21 @@ public:
 
     void push_back(const T& elem)
     {
-       ///
+
+        list_Node<T>* tmp = new list_Node<T>{elem, nullptr, sentinel};
+
+        if(!empty())
+        {
+            tmp->prev = tail;
+            tail->next = tmp;
+            tail = tmp;
+        }
+        else
+             head = tmp;
+
+        update_tail();
+        update_sentinel();
+
     }
 
     iterator begin()
