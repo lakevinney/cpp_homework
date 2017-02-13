@@ -49,7 +49,7 @@ void EventManager::removeListener(shared_ptr<EventListener>& listener)
                                     m_listeners.end(),
                                     [&listener](weak_ptr<EventListener>& elem)
                         { shared_ptr<EventListener> tmp = elem.lock();
-                          return tmp.get() == listener.get() || elem.expired(); } ), m_listeners.end() );
+                          return tmp.get() == listener.get(); } ), m_listeners.end() );
     }
 
 
