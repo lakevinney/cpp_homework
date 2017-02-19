@@ -20,7 +20,7 @@
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_Client_t {
     QByteArrayData data[8];
-    char stringdata0[77];
+    char stringdata0[72];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -30,18 +30,17 @@ struct qt_meta_stringdata_Client_t {
 static const qt_meta_stringdata_Client_t qt_meta_stringdata_Client = {
     {
 QT_MOC_LITERAL(0, 0, 6), // "Client"
-QT_MOC_LITERAL(1, 7, 8), // "dataRead"
-QT_MOC_LITERAL(2, 16, 0), // ""
-QT_MOC_LITERAL(3, 17, 11), // "onConnected"
-QT_MOC_LITERAL(4, 29, 14), // "onDisconnected"
-QT_MOC_LITERAL(5, 44, 14), // "onBytesWritten"
-QT_MOC_LITERAL(6, 59, 5), // "bytes"
-QT_MOC_LITERAL(7, 65, 11) // "onReadyRead"
+QT_MOC_LITERAL(1, 7, 12), // "sender_ready"
+QT_MOC_LITERAL(2, 20, 0), // ""
+QT_MOC_LITERAL(3, 21, 8), // "dataRead"
+QT_MOC_LITERAL(4, 30, 8), // "Transmit"
+QT_MOC_LITERAL(5, 39, 11), // "onReadyRead"
+QT_MOC_LITERAL(6, 51, 14), // "onBytesWritten"
+QT_MOC_LITERAL(7, 66, 5) // "bytes"
 
     },
-    "Client\0dataRead\0\0onConnected\0"
-    "onDisconnected\0onBytesWritten\0bytes\0"
-    "onReadyRead"
+    "Client\0sender_ready\0\0dataRead\0Transmit\0"
+    "onReadyRead\0onBytesWritten\0bytes"
 };
 #undef QT_MOC_LITERAL
 
@@ -56,25 +55,25 @@ static const uint qt_meta_data_Client[] = {
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       1,       // signalCount
+       2,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
        1,    0,   39,    2, 0x06 /* Public */,
+       3,    1,   40,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       3,    0,   40,    2, 0x0a /* Public */,
-       4,    0,   41,    2, 0x0a /* Public */,
-       5,    1,   42,    2, 0x0a /* Public */,
-       7,    0,   45,    2, 0x0a /* Public */,
+       4,    0,   43,    2, 0x0a /* Public */,
+       5,    0,   44,    2, 0x0a /* Public */,
+       6,    1,   45,    2, 0x0a /* Public */,
 
  // signals: parameters
     QMetaType::Void,
+    QMetaType::Void, QMetaType::Int,    2,
 
  // slots: parameters
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::LongLong,    6,
-    QMetaType::Void,
+    QMetaType::Void, QMetaType::LongLong,    7,
 
        0        // eod
 };
@@ -85,11 +84,11 @@ void Client::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void
         Client *_t = static_cast<Client *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->dataRead(); break;
-        case 1: _t->onConnected(); break;
-        case 2: _t->onDisconnected(); break;
-        case 3: _t->onBytesWritten((*reinterpret_cast< qint64(*)>(_a[1]))); break;
-        case 4: _t->onReadyRead(); break;
+        case 0: _t->sender_ready(); break;
+        case 1: _t->dataRead((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 2: _t->Transmit(); break;
+        case 3: _t->onReadyRead(); break;
+        case 4: _t->onBytesWritten((*reinterpret_cast< qint64(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
@@ -97,8 +96,14 @@ void Client::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void
         void **func = reinterpret_cast<void **>(_a[1]);
         {
             typedef void (Client::*_t)();
-            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&Client::dataRead)) {
+            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&Client::sender_ready)) {
                 *result = 0;
+            }
+        }
+        {
+            typedef void (Client::*_t)(int );
+            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&Client::dataRead)) {
+                *result = 1;
             }
         }
     }
@@ -141,8 +146,15 @@ int Client::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 
 // SIGNAL 0
-void Client::dataRead()
+void Client::sender_ready()
 {
     QMetaObject::activate(this, &staticMetaObject, 0, Q_NULLPTR);
+}
+
+// SIGNAL 1
+void Client::dataRead(int _t1)
+{
+    void *_a[] = { Q_NULLPTR, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
+    QMetaObject::activate(this, &staticMetaObject, 1, _a);
 }
 QT_END_MOC_NAMESPACE

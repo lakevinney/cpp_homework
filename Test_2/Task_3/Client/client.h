@@ -3,7 +3,11 @@
 
 #include <QObject>
 #include <QTcpSocket>
+#include <QTimer>
+#include <QTime>
+#include <QDateTime>
 #include "packet.h"
+
 
 class Client : public QObject
 {
@@ -11,24 +15,23 @@ class Client : public QObject
 public:
     explicit Client(QObject *parent = 0);
     ~Client();
-
     void Connect();
 
 signals:
-    void dataRead();
+    void sender_ready();
+    void dataRead(int);
 
 public slots:
 
-    void onConnected();
-    void onDisconnected();
-    void onBytesWritten(qint64 bytes);
+    void Transmit();
     void onReadyRead();
+    void onBytesWritten(qint64 bytes);
 
 private:
 
-    int m_value;
-
     QTcpSocket* m_socket;
+    size_t m_startT;
+    size_t m_stopT;
 };
 
 #endif // CLIENT_H
