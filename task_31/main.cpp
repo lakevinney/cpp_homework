@@ -85,7 +85,7 @@ public /*signals*/:
 
 
 
-int main(int argc, char *argv[])
+int main()
 {
     auto d = make_shared<CallDispatcher>();
 
