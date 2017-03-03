@@ -6,7 +6,7 @@
 #include "reader.h"
 #include "writer.h"
 
-class Server : public QObject
+class Server : public QTcpServer
 {
     Q_OBJECT
 public:
@@ -17,13 +17,16 @@ signals:
  //----------------------
 
 public slots:
-    void onNewConnection();
+    //void onNewConnection();
     void onDisconnected();
     void Start();
     void InitSession();
 
+protected:
+    void incomingConnection(qintptr socketDescriptor) override;
+
 private:
-    QTcpServer* m_server;
+//    QTcpServer* m_server;
     Writer* m_writer;
     Reader* m_reader;
     bool m_clientReady;
